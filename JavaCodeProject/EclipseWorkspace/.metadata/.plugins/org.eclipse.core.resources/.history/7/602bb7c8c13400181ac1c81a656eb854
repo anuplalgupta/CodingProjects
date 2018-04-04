@@ -1,0 +1,38 @@
+package practice;
+
+import java.util.Scanner;
+
+public class GuessTheNumber {
+	
+	public static int guessNumber(int A, int B) {
+		return ( A+B)/2;
+	}
+
+	public static void main(String[] args) {
+		
+		// TODO Auto-generated method stub
+		int T;
+		Scanner in = new Scanner(System.in);
+		
+		T = in.nextInt();
+		while(T>0) {
+			T--;
+			int A,B;
+			A = in.nextInt();
+			B = in.nextInt();
+			
+			int N;
+			N = in.nextInt();
+			
+			while(N >0) {
+				N--;
+				int Q = guessNumber(A,B);
+				System.out.println(Q);
+				String res = in.next();
+				
+			}
+		}
+		in.close();
+	}
+
+}
