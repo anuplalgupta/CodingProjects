@@ -1,0 +1,44 @@
+package practice;
+
+import java.util.Scanner;
+
+public class PrintChronologicallySortedIntegers {
+	
+	public static int increment(int val, int upperBound)
+	{
+		if(val >= upperBound)
+			return -1;
+		int numLength = String.valueOf(val).length();
+		int ubLength = String.valueOf(upperBound).length();
+		
+		if(numLength >= ubLength) {
+			return val+1;
+		}
+		else
+		{
+			return Integer.valueOf(String.valueOf(val)+"0");
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int n;
+		Scanner in = new Scanner(System.in);
+		n = in.nextInt();
+		if(n<1)
+			System.out.println(n);
+		int numPrint = 1;
+		for(int i =0;i<n;i++) {
+			System.out.println(numPrint);
+			numPrint = increment(numPrint,n);
+			if(numPrint <1) {
+				break;
+			}
+			
+		}
+		in.close();
+
+	}
+
+}

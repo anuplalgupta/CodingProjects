@@ -16,10 +16,9 @@ public class BuildPackages {
 		List<String> dependencyList = new ArrayList<String>();
 		return dependencyList;
 	}
-	class InvalidInput
 
-	Map<String, Integer> packageMap = new HashMap<String, Integer>();
-	List<String> buildOrder = new LinkedList<String>();
+	private Map<String, Integer> packageMap = new HashMap<String, Integer>();
+	private List<String> buildOrder = new LinkedList<String>();
 
 	public void buildPackages(String mainPackage) throws InvalidInputException, CyclicDependencyException{
 	    
@@ -38,10 +37,10 @@ public class BuildPackages {
 	    
 	    packageMap.put(mainPackage,1);
 	    
-	    List<String> adjacentPackages = getDependacies(mainPackage);
+	    List<String> adjacentPackages = getDependencies(mainPackage);
 	    
 	    //DFS recursion for each dependency
-	    for(String pack : adjacenPackages){
+	    for(String pack : adjacentPackages){
 	        buildPackages(pack);
 	    }
 	    packageMap.put(mainPackage,2);

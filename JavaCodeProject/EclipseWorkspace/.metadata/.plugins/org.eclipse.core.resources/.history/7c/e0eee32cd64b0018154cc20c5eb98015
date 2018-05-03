@@ -1,0 +1,106 @@
+package googleCodeJam2018;
+
+import java.util.Scanner;
+
+class MetalPair{
+	int first,second;
+
+	public MetalPair(int first, int second) {
+		super();
+		this.first = first;
+		this.second = second;
+	}
+
+	public int getFirst() {
+		return first;
+	}
+
+	public void setFirst(int first) {
+		this.first = first;
+	}
+
+	public int getSecond() {
+		return second;
+	}
+
+	public void setSecond(int second) {
+		this.second = second;
+	}
+
+}
+
+public class Transmulation {
+	
+	public static boolean ispossiblePerGram(MetalPair[] formula, int[] quantity, int metalIndex, int[] visited) {
+		
+		
+		return false;
+	}
+	public static boolean isPossible(MetalPair[] formula, int[] quantity) {
+		int leadFormulaFirst = formula[0].getFirst();
+		int leadFormulaSecond = formula[0].getSecond();
+		if(quantity[leadFormulaFirst] >0 && quantity[leadFormulaSecond]>0) {
+			quantity[leadFormulaFirst]--;
+			quantity[leadFormulaSecond]--;
+			return true;
+			
+		}
+		else {
+			int[] visited = new int[quantity.length];
+			
+			if(quantity[leadFormulaFirst] <=0) {
+				quantity[leadFormulaSecond]--;
+				visited[leadFormulaFirst] =1;
+				if(ispossiblePerGram(formula,quantity,leadFormulaFirst,visited) ) {
+					return true;
+				}
+				else
+					return false;
+			}
+			if(quantity[leadFormulaSecond] <=0) {
+				quantity[leadFormulaFirst]--;
+				visited[leadFormulaSecond] =1;
+				if(ispossiblePerGram(formula,quantity,leadFormulaSecond,visited) ) {
+					return true;
+				}
+				else
+					return false;
+			}
+			
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
+		int T;
+		T = input.nextInt();
+		while(T>0) {
+			T--;
+			int m = input.nextInt();
+			MetalPair formula[] = new MetalPair[m]; 
+			for(int i =0;i<m;i++) {
+				int first,second;
+				first = input.nextInt();
+				second = input.nextInt();
+				formula[i] = new MetalPair(first, second);
+			}
+			int quantity[] = new int[m];
+			for(int i =0;i<m;i++) {
+				quantity[i] = input.nextInt();
+			}
+			int sum = quantity[0];
+			quantity[0] =0;
+			while(isPossible(formula,quantity)) {
+				
+				sum++;
+				
+			}
+			System.out.println(sum);
+			
+		}
+		input.close();
+	}
+
+}
