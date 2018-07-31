@@ -43,6 +43,7 @@ public class BinarySearch {
 		else
 			System.out.println("value"+ val+"not found");
 		
+		in.close();
 	}
 
 }
