@@ -1,13 +1,16 @@
 import sys
+import re
 #import nltk
 #nltk.download('punkt')
-#An utility program to search a file for list of keywords and report presence 
+#An utility  program to search a file for list of keywords and report presence 
 # with line number
 
+# loop  loop
 
 def main():
     if len(sys.argv) <  2:
         print("Usage: BatchFileFindUtil.py <file_absolute_path> <Keyword1> <Keyword2> ...")
+        return
 
     filePath = sys.argv[1]
     #print("file path is" + filePath)
@@ -17,20 +20,22 @@ def main():
     #print("Just looping through keywords")
     keywordMap = dict()
 
-    
+    #populate a map for kewords to store the line numbers if found
     for i in range(len(sys.argv)-2):
         keyword = sys.argv[i+2]
         keywordMap[keyword] = ""
-        print(keyword)
 
 
 
-    l =0
+    line_number =0
     for line in f:
-        l = l+1
+        line_number = line_number+1
         for word in line.split():
-            if(keywordMap.__contains__(word)):
-                keywordMap[word] = str(keywordMap[word]) + str(l)
+            #remove special charectores from begining and end
+            mystring = re.sub("^\W+", "", word)
+            mystring = re.sub("\W+$", "", mystring)
+            if(keywordMap.__contains__(mystring)):
+                keywordMap[mystring] = str(keywordMap[mystring]) + " "+str(line_number)
             
     absentList = list()
     print("keyword \t"+"line numbers")
@@ -38,10 +43,10 @@ def main():
         if(keywordMap[k] == ""):
             absentList.append(k)
         else:
-            print(k +"\t"+keywordMap[k])
+            print(k +" \t"+keywordMap[k])
     
     print("keywords not found")
-    for word in absentList
+    for word in absentList:
         print(word)
 
     #source_code = nltk.word_tokenize(f.read())
