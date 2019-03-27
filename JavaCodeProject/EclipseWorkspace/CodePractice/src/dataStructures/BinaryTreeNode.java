@@ -4,6 +4,10 @@ public class BinaryTreeNode {
 	BinaryTreeNode leftChild, rightChild;
 	int val;
 	
+	public BinaryTreeNode(int val) {
+		// TODO Auto-generated constructor stub
+		this.val = val;
+	}
 	public BinaryTreeNode getLeftChild() {
 		return leftChild;
 	}
