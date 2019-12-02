@@ -22,7 +22,7 @@ def main():
 
     #populate a map for kewords to store the line numbers if found
     for i in range(len(sys.argv)-2):
-        keyword = sys.argv[i+2]
+        keyword = sys.argv[i+2].lower()
         keywordMap[keyword] = ""
 
 
@@ -34,6 +34,7 @@ def main():
             #remove special charectores from begining and end
             mystring = re.sub("^\W+", "", word)
             mystring = re.sub("\W+$", "", mystring)
+            mystring = mystring.lower()
             if(keywordMap.__contains__(mystring)):
                 keywordMap[mystring] = str(keywordMap[mystring]) + " "+str(line_number)
             
