@@ -1,11 +1,13 @@
+package practice;
+
 public class RearrangeNegativePositive {
 
 	public void reversePositive(int[] arr, int startIndex, int endIndex) {
 
 		if (arr[endIndex] < 0)
 			return;
-		int PositiveStart = startIndex;
-		for (; arr[positiveStart] < 0; positiveStart++) ;
+		int positiveStart = startIndex;
+		//for (; arr[positiveStart] < 0; positiveStart++) ;
 
 		for (int i = positiveStart, j = endIndex; i < j; i++, j--) {
 			int temp = arr[i];
@@ -20,7 +22,7 @@ public class RearrangeNegativePositive {
 		if (arr[startIndex] > 0)
 			return;
 		int negativeEnd = startIndex;
-		for (; arr[negativeEnd] < 0 && negativeEnd <= endIndex; negativeEng++) ;
+		//for (; arr[negativeEnd] < 0 && negativeEnd <= endIndex; negativeEng++) ;
 
 		negativeEnd--;
 		for (int i = startIndex, j = negativeEnd; i < j; i++, j--) {
@@ -30,7 +32,7 @@ public class RearrangeNegativePositive {
 		}
 	}
 
-	public void reverseLpRn(int[] arr, int startIndex, int endIndex) {
+	public void reverseLpRn(int[] arr, int startIndexL, int endIndex) {
 
 		if (arr[endIndex] < 0)
 			return;
@@ -55,12 +57,12 @@ public class RearrangeNegativePositive {
 
 	public void printArray(int[] arr) {
 		for (int i : arr) {
-			system.out.print(i + "  ");
+			System.out.print(i + "  ");
 		}
 	}
 
 
-	public void rearrange(int[] arr, int startIndexL, int endIndexL, startIndexR, endIndexR) {
+	public void rearrange(int[] arr, int startIndexL, int endIndexL, int startIndexR, int endIndexR) {
 		reversePositive(arr, startIndexL, endIndexL);
 		reverseNegative(arr, startIndexR, endIndexR);
 
@@ -89,7 +91,8 @@ public class RearrangeNegativePositive {
 		//revert the Lp'Rn' together -->LnRnLpRp
 
 
-		mergerRearange(arr, 0, arr.length - 1);
+		//mergerRearange(arr, 0, arr.length - 1);
+		return arr;
 	}
 }
 
