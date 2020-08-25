@@ -3,11 +3,9 @@ package practice;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import org.apache.commons.logging.impl.Log4JLogger;
 
 public class BinaryStringsFromMissingDigits {
 	
-	Log4JLogger logger = new Log4JLogger("wtf");
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -22,7 +20,6 @@ public class BinaryStringsFromMissingDigits {
 			printAllPatterns(pattern);
 			
 		}
-		
 
 	}
 

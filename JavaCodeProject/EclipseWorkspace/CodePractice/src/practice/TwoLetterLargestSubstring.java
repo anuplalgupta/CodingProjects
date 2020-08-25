@@ -2,8 +2,8 @@ package practice;
 
 import java.util.Scanner;
 
-class Solution {
-    public int lengthOfLongestSubstringTwoDistinct(String s) {
+class SolutionLSS {
+    public static int lengthOfLongestSubstringTwoDistinct(String s) {
         
         if(s == null){
             return 0;
@@ -57,7 +57,7 @@ public class TwoLetterLargestSubstring {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		String str = sc.next();
-		Solution sl = new Solution();
+        SolutionLSS sl = new SolutionLSS();
 		System.out.println(sl.lengthOfLongestSubstringTwoDistinct(str));
 	}
 

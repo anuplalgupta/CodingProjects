@@ -1,4 +1,4 @@
-package practice;
+package googleInterview2019;
 
 public interface Read4k {
 	

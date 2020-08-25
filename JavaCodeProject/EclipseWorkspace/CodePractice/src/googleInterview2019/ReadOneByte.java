@@ -1,4 +1,6 @@
-package practice;
+package googleInterview2019;
+
+
 
 //Looks better in retrospective
 public class ReadOneByte {
@@ -91,7 +93,7 @@ if(pos  == -1){
 
 		if(limit < 4096){
 			res.setErrCode(END_FILE_CODE);
-			res.setMsg(“No more content to read”);
+			res.setMsg(ï¿½No more content to readï¿½);
 			return res
 		}
 
@@ -110,7 +112,7 @@ if(pos  == -1){
 if(len == 0){//reached endo file
 	limit = 0;
 	res.setErrCode(END_FILE_CODE);
-			res.setMsg(“No more content to read”);
+			res.setMsg(ï¿½No more content to readï¿½);
 			return res
 		}
 		if(len < 4096){//last read no more reads allowed
