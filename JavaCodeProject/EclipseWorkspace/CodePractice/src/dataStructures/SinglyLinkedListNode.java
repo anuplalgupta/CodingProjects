@@ -15,8 +15,12 @@ public class SinglyLinkedListNode {
 	public void setVal(int val) {
 		this.val = val;
 	}
-	
-	
-	
 
+
+	public SinglyLinkedListNode(int val) {
+		this.val = val;
+	}
+
+	public SinglyLinkedListNode() {
+	}
 }

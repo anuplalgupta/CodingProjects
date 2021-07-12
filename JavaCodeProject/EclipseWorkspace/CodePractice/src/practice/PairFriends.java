@@ -7,8 +7,8 @@ import java.lang.*;
 import java.io.*;
 
 class TreeNode{
-	int val;
-	TreeNode left, right;
+	public int val;
+	public TreeNode left, right;
 }
 class PairFriends
  {
