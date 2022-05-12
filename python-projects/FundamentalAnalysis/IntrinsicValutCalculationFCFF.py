@@ -110,7 +110,7 @@ def calculate_intrisic_value( company_ticker):
     timespan = 100
     current_date = datetime.date.today()
     past_date = current_date-datetime.timedelta(days=timespan)
-    risk_free_rate_df = dr.DataReader('^TNX', 'yahoo', past_date, current_date) 
+    risk_free_rate_df = dr.DataReader('^TNX', 'yahoo', past_date, current_date)
     risk_free_rate = (risk_free_rate_df.iloc[len(risk_free_rate_df)-1,5])/100
     risk_free_rate
 
@@ -195,7 +195,72 @@ def calculate_intrisic_value( company_ticker):
     actual_stock_price = '${:,.2f}'.format(actual_stock_price)
     return intrinsic_price, actual_stock_price
 
-intrinsic_price, actual_stock_price =  calculate_intrisic_value("MSFT")
-print("Intrinsic Stock Price = %s"%(intrinsic_price))
-print("Actual Stock Price = %s"%(actual_stock_price))
+# intrinsic_price, actual_stock_price =  calculate_intrisic_value("MSFT")
+# print("Intrinsic Stock Price = %s"%(intrinsic_price))
+# print("Actual Stock Price = %s"%(actual_stock_price))
 
+#TODO cleanup code
+
+
+import yfinance as yf
+
+def fcf_last_four_years(symbol:str):
+    url_cf = "https://financial-statements.p.rapidapi.com/api/v1/resources/cash-flow"
+    querystring = {"ticker":symbol}
+
+    fs_api_host = "financial-statements.p.rapidapi.com"
+    rapid_api_key = "3706acacb3msh46c55e4830d7093p19c8eejsnbb320118c331"
+    headers_fs = {
+        'x-rapidapi-host': fs_api_host,
+        'x-rapidapi-key': rapid_api_key
+        }
+    cash_flow_response = requests.request("GET", url_cf, headers=headers_fs, params=querystring)
+    cash_flow_df = pd.DataFrame.from_dict(cash_flow_response.json())
+    cash_flow_df = cash_flow_df.drop('ttm', axis = 1)
+    # print(cash_flow_df)
+    # print(cash_flow_df.loc['Free Cash Flow',:].values.tolist())
+    fcf = cash_flow_df.loc['Free Cash Flow',:].values.tolist()
+    return fcf
+
+
+def Intrinsic_value_fcf_DCF_model( symbol : str):
+    tkr = yf.Ticker(symbol)
+    os_shares = tkr.info['sharesOutstanding']
+
+    # Constants and assumptions
+    perp_rate = 0.02 #2%
+    req_rate = 0.07 #7%
+    cf_growth_rate = 0.03
+
+    yrs = [1,2,3,4]
+    fcf =  list(map(int, fcf_last_four_years(symbol))) #[50803000, 60000000,50000000,70000000] #TODO get it throught API
+
+    future_fcf = []
+    discountFactor = []
+    discounted_future_fcf = []
+
+    terminal_value = fcf[-1] * (1+perp_rate)/(req_rate-perp_rate)
+    print("terminal_value is "+str(terminal_value))
+
+    for y in yrs :
+        cf = fcf[-1] *  (1+cf_growth_rate)**y
+        future_fcf.append(cf)
+        discountFactor.append((1+req_rate)**y)
+
+    print("discount factor is "+ str(discountFactor))
+    print("future fcf is "+ str(future_fcf))
+
+    for i in range(0,len(yrs)):
+        discounted_future_fcf.append(future_fcf[i]/discountFactor[i])
+
+    print("discounted future fcf is "+str(discounted_future_fcf))
+
+    discounted_terminal_value = terminal_value/(1+req_rate)**4
+    discounted_future_fcf.append(discounted_terminal_value)
+
+    todaysIntValCompany = sum(discounted_future_fcf)
+    fair_val = todaysIntValCompany*1000/os_shares
+
+    print("fair value of "+symbol+"is :"+str(fair_val))
+
+Intrinsic_value_fcf_DCF_model('aapl')
