@@ -2,7 +2,7 @@
 
 from urllib.request import urlopen
 import json
-
+from flask import Flask
 
 # def get_jsonparsed_data(url):
 #     """
@@ -260,7 +260,9 @@ def Intrinsic_value_fcf_DCF_model( symbol : str):
 
     todaysIntValCompany = sum(discounted_future_fcf)
     fair_val = todaysIntValCompany*1000/os_shares
+    res = "fair value of "+symbol+"is :"+str(fair_val)
+    print(res)
+    return res
 
-    print("fair value of "+symbol+"is :"+str(fair_val))
-
-Intrinsic_value_fcf_DCF_model('aapl')
+res = Intrinsic_value_fcf_DCF_model('fb')
+print(res)
