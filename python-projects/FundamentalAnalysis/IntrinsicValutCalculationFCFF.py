@@ -3,25 +3,8 @@
 from urllib.request import urlopen
 import json
 from flask import Flask
+import yfinance as yf
 
-# def get_jsonparsed_data(url):
-#     """
-#     Receive the content of ``url``, parse it as JSON and return the object.
-
-#     Parameters
-#     ----------
-#     url : str
-
-#     Returns
-#     -------
-#     dict
-#     """
-#     response = urlopen(url)
-#     data = response.read().decode("utf-8")
-#     return json.loads(data)
-
-# url = ("https://financialmodelingprep.com/api/v3/discounted-cash-flow/AAPL?apikey=demo")
-# print(get_jsonparsed_data(url))
 
 from bs4 import BeautifulSoup as bs
 import pandas as pd
@@ -71,8 +54,6 @@ def get_required_dataframes (ticker):
     key_stats_df = key_stats_df.transpose()
     key_stats_df
     return cash_flow_df, income_statement_df, balance_sheet_df, key_stats_df
-
-
 
 def calculate_intrisic_value( company_ticker):
 
@@ -195,15 +176,6 @@ def calculate_intrisic_value( company_ticker):
     actual_stock_price = '${:,.2f}'.format(actual_stock_price)
     return intrinsic_price, actual_stock_price
 
-# intrinsic_price, actual_stock_price =  calculate_intrisic_value("MSFT")
-# print("Intrinsic Stock Price = %s"%(intrinsic_price))
-# print("Actual Stock Price = %s"%(actual_stock_price))
-
-#TODO cleanup code
-
-
-import yfinance as yf
-
 def fcf_last_four_years(symbol:str):
     url_cf = "https://financial-statements.p.rapidapi.com/api/v1/resources/cash-flow"
     querystring = {"ticker":symbol}
@@ -264,5 +236,5 @@ def Intrinsic_value_fcf_DCF_model( symbol : str):
     print(res)
     return res
 
-res = Intrinsic_value_fcf_DCF_model('fb')
+res = Intrinsic_value_fcf_DCF_model('msft')
 print(res)
