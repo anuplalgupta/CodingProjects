@@ -205,7 +205,7 @@ def Intrinsic_value_fcf_DCF_model( symbol : str):
     cf_growth_rate = 0.03
 
     yrs = [1,2,3,4]
-    fcf =  list(map(int, fcf_last_four_years(symbol))) #[50803000, 60000000,50000000,70000000] #TODO get it throught API
+    fcf =  list(map(int, fcf_last_four_years(symbol))) 
 
     future_fcf = []
     discountFactor = []
